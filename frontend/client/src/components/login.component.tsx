@@ -1,4 +1,5 @@
 import React, { FormEvent, useState } from "react";
+import axios from "axios";
 
 function Login() {
   const [user, setUser] = useState({ username: "", password: "" });
@@ -6,6 +7,18 @@ function Login() {
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     console.log(user);
+
+    axios
+      .post("http://localhost:3000/api/login", {
+        username: user.username,
+        password: user.password,
+      })
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   return (

@@ -24,8 +24,6 @@ function Clients() {
       });
   }, []);
 
-  console.log("clients ", clients);
-
   return (
     <div>
       <div className="row">
@@ -49,7 +47,7 @@ function Clients() {
             </thead>
             <tbody>
               {clients.map((client) => (
-                <tr>
+                <tr key={client.client_id}>
                   <th scope="row">{client.client_id}</th>
                   <td>{client.name}</td>
                   <td>{client.address}</td>
