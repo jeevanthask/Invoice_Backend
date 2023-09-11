@@ -17,6 +17,10 @@ class User {
       );
     });
   }
+
+  static getUser(username, password) {
+    return db.execute(`SELECT * FROM users WHERE username = '${username}'`);
+  }
 }
 
 module.exports = User;
