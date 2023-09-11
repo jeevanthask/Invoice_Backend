@@ -1,4 +1,6 @@
 const db = require("../util/database");
+const bcrypt = require("bcrypt");
+const saltRounds = 10;
 
 class User {
   constructor(username, email, password) {
@@ -8,10 +10,12 @@ class User {
   }
 
   saveUser() {
-    return db.execute(
-      "INSERT INTO users(username,email,password) VALUES(?,?,?)",
-      [this.username, this.email, this.password]
-    );
+    return bcrypt.hash(this.password, saltRounds).then((hash) => {
+      return db.execute(
+        "INSERT INTO users(username,email,password) VALUES(?,?,?)",
+        [this.username, this.email, hash]
+      );
+    });
   }
 }
 
