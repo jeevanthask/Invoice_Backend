@@ -18,7 +18,7 @@ class User {
     });
   }
 
-  static getUser(username, password) {
+  static getUser(username) {
     return db.execute(`SELECT * FROM users WHERE username = '${username}'`);
   }
 }

@@ -14,7 +14,7 @@ exports.addUser = (req, res) => {
 };
 
 exports.logUser = (req, res) => {
-  const user = User.getUser(req.body.username, req.body.password);
+  const user = User.getUser(req.body.username);
   user
     .then((result) => {
       bcrypt
