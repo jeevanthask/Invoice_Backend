@@ -38,6 +38,20 @@ function Invoices() {
 
   return (
     <div>
+      <div className="row mb-3">
+        <div className="col-md-12">
+          <form>
+            <div className="mb-3">
+              <label className="form-label">Email address</label>
+              <input type="text" className="form-control" />
+            </div>
+
+            <button type="submit" className="btn btn-primary">
+              Submit
+            </button>
+          </form>
+        </div>
+      </div>
       <div className="row">
         <div className="col-md-12">
           <table className="table">

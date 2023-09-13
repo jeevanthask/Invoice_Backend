@@ -9,6 +9,7 @@ import Login from "./components/login.component.tsx";
 import PaymentMethods from "./components/paymentMethods.component.tsx";
 import Payments from "./components/payments.component.tsx";
 import Invoices from "./components/invoices.component.tsx";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const router = createBrowserRouter([
   {
