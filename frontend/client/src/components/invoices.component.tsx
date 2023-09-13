@@ -1,5 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState } from "react";
 import axios from "axios";
+import Button from "react-bootstrap/Button";
+import Modal from "react-bootstrap/Modal";
 
 interface IInvoice {
   invoice_id: number;
@@ -12,9 +14,41 @@ interface IInvoice {
   payment_date: string;
 }
 
+interface IClientInfo {
+  client_id: number;
+  name: string;
+  address: string;
+  city: string;
+  state: string;
+  phone: string;
+}
+
 function Invoices() {
   const [invoices, setInvoices] = useState<IInvoice[]>([]);
   const [spinner, setSpinner] = useState(true);
+  const [invoiceId, setInvoiceId] = useState("");
+  const [show, setShow] = useState(false);
+  const [clientInfo, setClientInfo] = useState<IClientInfo[]>([]);
+
+  const handleClose = () => setShow(false);
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
+    axios
+      .post("http://localhost:3000/api/invoices/clientInfo", {
+        invoice_id: invoiceId,
+      })
+      .then((result) => {
+        console.log(result.data);
+        setClientInfo(result.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    setShow(true);
+  };
 
   useEffect(() => {
     axios
@@ -42,11 +76,19 @@ function Invoices() {
         <div className="col-md-12">
           <form>
             <div className="mb-3">
-              <label className="form-label">Email address</label>
-              <input type="text" className="form-control" />
+              <label className="form-label">Invoice Id</label>
+              <input
+                type="text"
+                className="form-control"
+                onChange={(event) => setInvoiceId(event.target.value)}
+              />
             </div>
 
-            <button type="submit" className="btn btn-primary">
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={handleSubmit}
+            >
               Submit
             </button>
           </form>
@@ -89,6 +131,41 @@ function Invoices() {
           </table>
         </div>
       </div>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Modal heading</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <table className="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">City</th>
+                <th scope="col">State</th>
+                <th scope="col">Phone</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr key={clientInfo[0]?.client_id}>
+                <th scope="row">{clientInfo[0]?.client_id}</th>
+                <th scope="row">{clientInfo[0]?.name}</th>
+                <th scope="row">{clientInfo[0]?.address}</th>
+                <td>{clientInfo[0]?.city}</td>
+                <td>{clientInfo[0]?.state}</td>
+                <td>{clientInfo[0]?.phone}</td>
+              </tr>
+            </tbody>
+          </table>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="success" onClick={handleClose}>
+            Close
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 }

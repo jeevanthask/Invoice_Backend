@@ -9,3 +9,13 @@ exports.getInvoices = (req, res) => {
       res.send(error);
     });
 };
+
+exports.getClientInfo = (req, res) => {
+  Invoice.fetchClientData(req.body.invoice_id)
+    .then(([clientInfo, filedData]) => {
+      res.send(clientInfo);
+    })
+    .catch((error) => {
+      res.send(error);
+    });
+};

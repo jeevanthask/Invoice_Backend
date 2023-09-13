@@ -24,6 +24,12 @@ class Invoice {
   static fetchAllInvoices() {
     return db.execute("SELECT * FROM invoices");
   }
+
+  static fetchClientData(invoice_id) {
+    return db.execute(
+      `SELECT * FROM clients WHERE client_id = (SELECT client_id FROM invoices WHERE invoice_id = ${invoice_id})`
+    );
+  }
 }
 
 module.exports = Invoice;
