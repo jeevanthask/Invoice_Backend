@@ -41,7 +41,7 @@ function App() {
           </div>
         </div>
       </nav>
-      <div className="row">
+      <div className="row main-content">
         <div className="col-md-12">
           <Outlet />
         </div>

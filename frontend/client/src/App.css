@@ -1,4 +1,7 @@
 /* src/Home.css */
+.row.main-content {
+  margin: 2rem;
+}
 
 .home {
   text-align: center;
