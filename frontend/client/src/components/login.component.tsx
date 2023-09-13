@@ -9,12 +9,13 @@ function Login() {
     console.log(user);
 
     axios
-      .post("http://localhost:3000/api/login", {
+      .post("http://localhost:3000/api/logUser/users", {
         username: user.username,
         password: user.password,
       })
       .then((response) => {
-        console.log(response);
+        console.log(response.data);
+        localStorage.setItem("token", response.data);
       })
       .catch((error) => {
         console.log(error);
