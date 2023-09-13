@@ -5,6 +5,7 @@ const clientRoute = require("./routes/clientRouter");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const userRoute = require("./routes/userRouter");
+const invoiceRouter = require("./routes/invoiceRouter");
 
 app.use(express.json());
 app.use(cors());
@@ -16,5 +17,6 @@ app.get("/", (req, res) => {
 
 app.use("/api/", clientRoute);
 app.use("/api/", userRoute);
+app.use("/api/", invoiceRouter);
 
 app.listen(PORT, () => console.log(`listening in port ${PORT}`));
