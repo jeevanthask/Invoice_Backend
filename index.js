@@ -6,6 +6,9 @@ const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const userRoute = require("./routes/userRouter");
 const invoiceRouter = require("./routes/invoiceRouter");
+const { graphqlHTTP } = require("express-graphql");
+const graphqlSchema = require("./graphql/schema");
+const graphqlResolver = require("./graphql/resolvers");
 
 app.use(express.json());
 app.use(cors());
@@ -18,5 +21,12 @@ app.get("/", (req, res) => {
 app.use("/api/", clientRoute);
 app.use("/api/", userRoute);
 app.use("/api/", invoiceRouter);
+app.use(
+  "/graphql",
+  graphqlHTTP({
+    schema: graphqlSchema,
+    rootValue: graphqlResolver,
+  })
+);
 
 app.listen(PORT, () => console.log(`listening in port ${PORT}`));
