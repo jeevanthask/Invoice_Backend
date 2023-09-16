@@ -1,4 +1,4 @@
-const db = require("../util/database");
+const invoice_db = require("../util/invoice_database");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
 
@@ -11,7 +11,7 @@ class User {
 
   saveUser() {
     return bcrypt.hash(this.password, saltRounds).then((hash) => {
-      return db.execute(
+      return invoice_db.execute(
         "INSERT INTO users(username,email,password) VALUES(?,?,?)",
         [this.username, this.email, hash]
       );
@@ -19,7 +19,9 @@ class User {
   }
 
   static getUser(username) {
-    return db.execute(`SELECT * FROM users WHERE username = '${username}'`);
+    return invoice_db.execute(
+      `SELECT * FROM users WHERE username = '${username}'`
+    );
   }
 }
 

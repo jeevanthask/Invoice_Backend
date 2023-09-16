@@ -10,6 +10,7 @@ const { graphqlHTTP } = require("express-graphql");
 const graphqlSchema = require("./graphql/schema");
 const graphqlResolver = require("./graphql/resolvers");
 const paymentMethodRouter = require("./routes/paymentMethodRouter");
+const orderRouter = require("./routes/orderRouter");
 
 app.use(express.json());
 app.use(cors());
@@ -23,6 +24,7 @@ app.use("/api/", clientRoute);
 app.use("/api/", userRoute);
 app.use("/api/", invoiceRouter);
 app.use("/api/", paymentMethodRouter);
+app.use("/api/", orderRouter);
 app.use(
   "/graphql",
   graphqlHTTP({

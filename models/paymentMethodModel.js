@@ -1,4 +1,4 @@
-const db = require("../util/database");
+const invoice_db = require("../util/invoice_database");
 
 class PaymentMethod {
   constructor(payment_method_id, name) {
@@ -7,7 +7,7 @@ class PaymentMethod {
   }
 
   static fetchPaymentMethods() {
-    return db.execute("SELECT * FROM payment_methods");
+    return invoice_db.execute("SELECT * FROM payment_methods");
   }
 }
 

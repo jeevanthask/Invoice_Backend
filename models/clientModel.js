@@ -1,4 +1,4 @@
-const db = require("../util/database");
+const invoice_db = require("../util/invoice_database");
 
 class Client {
   constructor(id, name, address, city, state, phone) {
@@ -11,21 +11,21 @@ class Client {
   }
 
   saveClient() {
-    return db.execute(
+    return invoice_db.execute(
       `INSERT INTO clients(client_id,name,address,city,state,phone) VALUES('${this.client_id}','${this.name}','${this.address}','${this.city}','${this.state}','${this.phone}')`
     );
   }
 
   static fetchAllClients() {
-    return db.execute("SELECT * FROM clients");
+    return invoice_db.execute("SELECT * FROM clients");
   }
 
   static fetchOneClient(id) {
-    return db.execute(`SELECT * FROM clients WHERE client_id = ${id}`);
+    return invoice_db.execute(`SELECT * FROM clients WHERE client_id = ${id}`);
   }
 
   static updateClient(client_id, name, address, city, state, phone) {
-    return db.execute(
+    return invoice_db.execute(
       `UPDATE clients SET name ='${name}', address = '${address}', city = '${city}', state = '${state}', phone = '${phone}' WHERE client_id = ${client_id}`
     );
   }

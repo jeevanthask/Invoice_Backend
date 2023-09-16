@@ -1,4 +1,4 @@
-const db = require("../util/database");
+const invoice_db = require("../util/invoice_database");
 
 class Invoice {
   constructor(
@@ -22,11 +22,11 @@ class Invoice {
   }
 
   static fetchAllInvoices() {
-    return db.execute("SELECT * FROM invoices");
+    return invoice_db.execute("SELECT * FROM invoices");
   }
 
   static fetchClientData(invoice_id) {
-    return db.execute(
+    return invoice_db.execute(
       `SELECT * FROM clients WHERE client_id = (SELECT client_id FROM invoices WHERE invoice_id = ${invoice_id})`
     );
   }
