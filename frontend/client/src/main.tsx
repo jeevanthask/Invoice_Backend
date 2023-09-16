@@ -11,6 +11,7 @@ import Invoices from "./components/invoices.component.tsx";
 import { PrimeReactProvider, PrimeReactContext } from "primereact/api";
 import "primereact/resources/themes/saga-purple/theme.css";
 import "primereact/resources/primereact.min.css";
+import "primeicons/primeicons.css";
 import App from "./App.tsx";
 import "./index.css";
 

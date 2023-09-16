@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
 
 interface IClient {
   address: string;
@@ -31,37 +33,54 @@ function Clients() {
           <h2>Clients Component</h2>
         </div>
       </div>
+
       <div className="row">
         <div className="col-md-12">
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Name</th>
-                <th scope="col">Address</th>
-                <th scope="col">City</th>
-                <th scope="col">State</th>
-                <th scope="col">Phone</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {clients.map((client) => (
-                <tr key={client.client_id}>
-                  <th scope="row">{client.client_id}</th>
-                  <td>{client.name}</td>
-                  <td>{client.address}</td>
-                  <td>{client.city}</td>
-                  <td>{client.state}</td>
-                  <td>{client.phone}</td>
-                  <td>
-                    <button className="btn btn-primary mx-2">Edit</button>
-                    <button className="btn btn-danger">Delete</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="card">
+            <DataTable
+              value={clients}
+              paginator
+              rows={5}
+              rowsPerPageOptions={[5, 10, 25, 50]}
+              tableStyle={{ minWidth: "50rem" }}
+            >
+              <Column
+                field="client_id"
+                header="ClientId"
+                style={{ width: "10%" }}
+              ></Column>
+              <Column
+                field="name"
+                header="Name"
+                style={{ width: "15%" }}
+              ></Column>
+              <Column
+                field="address"
+                header="Address"
+                style={{ width: "15%" }}
+              ></Column>
+              <Column
+                field="city"
+                header="City"
+                style={{ width: "15%" }}
+              ></Column>
+              <Column
+                field="state"
+                header="State"
+                style={{ width: "15%" }}
+              ></Column>
+              <Column
+                field="phone"
+                header="Phone"
+                style={{ width: "15%" }}
+              ></Column>
+              <Column
+                field="action"
+                header="Action"
+                style={{ width: "15%" }}
+              ></Column>
+            </DataTable>
+          </div>
         </div>
       </div>
     </div>

@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { DataTable } from "primereact/datatable";
+import { Column } from "primereact/column";
 
 interface IPaymentMethods {
   payment_method_id: number;
@@ -25,7 +27,7 @@ function PaymentMethods() {
   if (spinner) {
     return (
       <div>
-        <div className="spinner-grow text-success" role="status"></div>
+        <i className="pi pi-spin pi-spinner" style={{ fontSize: "2rem" }}></i>
       </div>
     );
   }
@@ -34,27 +36,18 @@ function PaymentMethods() {
     <div>
       <div className="row">
         <div className="col-md-12">
-          <table className="table">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Payment Method</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {paymentMethods.map((method) => (
-                <tr key={method.payment_method_id}>
-                  <th scope="row">{method.payment_method_id}</th>
-                  <td>{method.name}</td>
-                  <td>
-                    <button className="btn btn-primary mx-2">Edit</button>
-                    <button className="btn btn-danger">Delete</button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
+          <div className="card">
+            <DataTable
+              value={paymentMethods}
+              paginator
+              rows={5}
+              rowsPerPageOptions={[5, 10, 25, 50]}
+              tableStyle={{ minWidth: "50rem" }}
+            >
+              <Column field="payment_method_id" header="Id"></Column>
+              <Column field="name" header="Method"></Column>
+            </DataTable>
+          </div>
         </div>
       </div>
     </div>
