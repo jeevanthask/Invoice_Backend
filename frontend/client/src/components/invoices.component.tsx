@@ -1,7 +1,5 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import axios from "axios";
-import Button from "react-bootstrap/Button";
-import Modal from "react-bootstrap/Modal";
 
 interface IInvoice {
   invoice_id: number;
@@ -132,7 +130,7 @@ function Invoices() {
         </div>
       </div>
 
-      <Modal show={show} onHide={handleClose}>
+      {/* <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Client Information</Modal.Title>
         </Modal.Header>
@@ -165,7 +163,7 @@ function Invoices() {
             Close
           </Button>
         </Modal.Footer>
-      </Modal>
+      </Modal> */}
     </div>
   );
 }
